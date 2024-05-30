@@ -1,0 +1,6 @@
+buat path di urls.py (2x)
+buat html di folder template
+buat def di views.py (2x)
+
+yg pertama memindahkan kita pergi ke halaman form html nya
+yg kedua yg bener" proses ke database (edit, delete, dll)

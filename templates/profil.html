@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Profil{% endblock title %}
+
+{% block content %}
+<style>
+    * {
+        padding:0;
+        margin:0;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+    }
+    body {
+        background-color: #171D33;
+        background-image: url("static/components/croc.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        height: 100vh;
+    }
+    ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fff;
+        width: 450px;
+        height: 350px;
+        list-style: none;
+        font-size: 20px;
+        padding: 50px;
+        gap: 20px;
+        border-radius: 50px;
+    }
+    .profile-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 90vh;
+        img {
+            margin-block: 10px;
+        }
+    }
+    nav {
+        padding: 0 2em;
+        height: 8vh;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1em;
+        .bx-home {
+            font-size: 30px;
+            color: gray;
+            padding: 0.1em;
+            border-radius: 50px;
+            background-color: white;
+            transition: 150ms ease-in-out;
+        }
+        .bx-home:hover {
+            transform: scale(1.1)
+        }
+        a {
+            text-align: center;
+            align-items: center;
+        }
+    }
+    li {
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .placeholder {
+        display: flex;
+        justify-content: flex-start;
+        width: 150px;
+    }
+    .edit {
+        background-color: #EF1033;
+        text-decoration: none;
+        color: white;
+        padding: 0.5em;
+        border-radius: 50px;
+        transition: 150ms ease-in-out;
+    }
+    .edit:hover {
+        transform: scale(1.1);
+    }
+    .info {
+        width: 50%;
+    }
+    .bx-pencil {
+        font-size: 14px;
+    }
+</style>
+
+<nav>
+    <a class="edit" href="{% url 'editprofil' %}"><i class='bx bx-pencil'>&nbsp;</i>Edit Profile</a> <!-- Tambahkan tombol edit profil -->
+    <a href="{% url 'dashboard' %}"><i class='bx bx-home' ></i></a>
+</nav>
+<main>
+    <section class="profile-box">
+        <img src='static/components/profile.png'>
+        <ul class="profile-info">
+            <h2>View Your Profile</h2>
+            <li><span class="placeholder"><strong>Username</strong></span> <span class="info"><strong>:&nbsp;</strong>{{ user.username }}</span></li>
+            <li><span class="placeholder"><strong>Email</strong></span> <span class="info"><strong>:&nbsp;</strong>{{ user.email }}</span></li>
+            <li><span class="placeholder"><strong>First Name</strong></span> <span class="info"><strong>:&nbsp;</strong>{{ user.first_name }}</span></li>
+            <li><span class="placeholder"><strong>Last Name</strong></span> <span class="info"><strong>:&nbsp;</strong>{{ user.last_name }}</span></li>
+        </ul>
+    </section>
+</main>
+
+
+
+
+{% endblock content %}

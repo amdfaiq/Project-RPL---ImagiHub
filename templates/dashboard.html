@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock title %}
+
+{% block content %}
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        background-color: #FCFFE7;
+    }
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 25px 30px; 
+        .nav-left {
+            display: flex;
+            gap: 20px;
+            .nav-one {
+                font-family: "Sulphur Point", sans-serif;
+                font-size: 24px;
+                width: 200px;
+                display: flex;
+                justify-content: center;
+            }
+            .nav-two {
+                display: flex;
+                input {
+                    width: 1100px;
+                    height: 50px;
+                    padding: 10px;
+                    border: none;
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                    background-color: #E9E9E9;
+                }
+                button {
+                    height: 50px;
+                    width: 100px;
+                    border: none;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    background-color: #171D33;
+                    color: #f2f2f2;
+                    transition: 150ms ease-in-out;
+                }
+                button:hover {
+                    background-color: #245ab3;
+                    cursor: pointer;
+                }
+            }
+        }
+        .nav-right {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            text-align: center;
+            .nav-three {
+                font-size: 29px;
+                display: flex;
+                font-family: "Inter", sans-serif;
+            }
+            .nav-four {
+                font-size: 36px;
+                color: black;
+                a {
+                    transition: 150ms ease-in-out;
+                }
+            }
+            a:hover {
+                transform: scale(1.1);
+                color: red;
+            }
+        }  
+    }
+    .content-navigation {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        font-family: "Inter", sans-serif;
+        font-weight: 700;
+        a { 
+            text-decoration: none;
+            color: black;
+            padding: 10px;
+        }
+        .upload-btn {
+            background-color: #171D33;
+            color: white;
+            border-radius: 15px;
+            transition: 150ms ease-in-out;
+        }
+        .upload-btn:hover {
+            transform: scale(1.1);
+        }
+    }
+    .photos-container {
+        display: flex;
+        margin-top: 15px;
+        justify-content: center;
+        ul.photos-list {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 24px;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            height: 400px;
+            max-height: 400px;
+        }
+        .photos-item {
+            font-family: "Inter", sans-serif;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 40px;
+            padding: 20px;
+            background-color: #171D33;
+            min-width: 280px;
+            max-width: 280px;
+            .photos-item-one {
+                height: 250px;
+                width: 250px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden; 
+                img { 
+                    border-radius: 10px;
+                    width: 100%; 
+                    height: 100%; 
+                    object-fit: cover; 
+                }    
+            }
+            .photos-item-four {
+                display: flex;
+                justify-content: flex-end;
+                a {
+                    text-decoration: none;
+                    background-color: #7C99B4;
+                    padding: 10px;
+                    border-radius: 15px;
+                    color: white;
+                    transition: 150ms ease-in-out;
+                }
+                a:hover {
+                    transform: scale(1.1);
+                }
+            } 
+        }
+    }
+
+</style>
+
+<nav>
+    <section class="nav-left">
+        <div class="nav-one">
+            <h2>ImagiHub</h2>
+        </div>
+        <div class="nav-two">
+            <form method="GET" action="{% url 'dashboard' %} " class="search-container">
+                <input type="text" name="search_query" placeholder="Cari gambar...">
+                <button type="submit">Cari</button>
+            </form>
+        </div>
+    </section>
+    <section class="nav-right">
+        <div class="nav-three">
+            <p>{{ user.first_name }} {{ user.last_name }}</p>     
+        </div>
+        <div class="nav-four">
+            <a href="/"><i class='bx bx-log-out-circle'></i></a>
+            <a href="{% url 'profil' %}"><i class='bx bxs-user-circle'></i></a>
+        </div>    
+    </section>
+</nav>
+
+<section class="content-navigation">
+    <a class="upload-btn" href="uploadimage">Upload Gambar</a>
+    <a href="viewboard">Lihat Papan</a> 
+    <a href="boardpage">Buat Papan Baru</a> 
+</section>
+
+<section class="photos-container">
+    <ul style="list-style: none;" class="photos-list">
+        {% for image in imagelist %}
+        <li class="photos-item">
+            <div class="photos-item-one">
+                <img src="{{image.source.url}}" width="250">    
+            </div>
+            <div class="photos-item-two">
+                <h4>{{image.nama}}</h4>
+                <p>{{image.deskripsi}}</p>    
+            </div>
+            <div class="photos-item-three">
+                <p>Uploader: {{image.userid.get_full_name}}<p>
+            </div>
+            <div class="photos-item-four">
+                <a href="{{ image.source.url }}" download>Unduh Gambar</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% endblock content %}

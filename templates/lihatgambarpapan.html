@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock title %}
+
+{% block content %}
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+    }
+    body {
+        background-color: #171D33;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        gap: 10px;
+        justify-content: space-between;
+        h1 {
+            font-size: 45px;
+            color: #FCFFE7;
+            width: 25%;
+        }
+        p {
+            background-color: #D6D9C4;
+            width: 90%;
+            padding: 20px;
+        }
+    }
+
+    .sectionOne {
+        padding: 10px;
+        form {
+            display: flex; 
+            gap: 15px;
+        }
+        input {
+            padding: 5px 10px;
+        }
+        input[type="text"], input[type="file"] {
+            background-color: #FCFFE7;
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+        }
+        input[type="submit"] {
+            background-color: #EF1033;
+            border: none;
+            border-radius: 10px;
+            padding: 5px 10px; 
+            color: #FFEDE9;
+            transition: 150ms ease-in-out;
+        }
+        input[type="submit"]:hover {
+            pointer: cursor;
+            transform: scale(1.1);
+        }
+    }
+
+    .sectionTwo {
+        padding: 10px;
+        ul {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 24px;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            height: 400px;
+            max-height: 400px;
+        }
+        .items {
+            font-family: "Inter", sans-serif;
+            text-align: center;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: space-between;
+            border-radius: 40px;
+            padding: 20px;
+            background-color: #D6D9C4;
+            min-width: 280px;
+            max-width: 280px;
+            items-one {
+                height: 250px;
+                width: 250px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden; 
+                img { 
+                    border-radius: 10px;
+                    width: 100%; 
+                    height: 100%; 
+                    object-fit: cover; 
+                }    
+            }
+            .items-three {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+            a {
+                text-decoration: none;
+                display: flex;
+                justify-content: center;
+                background-color: #FFFFFF;
+                color: black;
+                padding: 5px;
+                border-radius: 10px;
+                font-size: 14px;
+                transition: 150ms ease-in-out;
+            }
+            a:hover {
+                transform: scale(1.1);
+            }
+            .hapus {
+                background-color: #EF1033;
+                color: white;
+            }
+        }
+    }
+    .bx-home {
+        color: white;
+        font-size: 32px;
+    }
+</style>
+
+<nav>
+    <h1>{{board.nama}}</h1>
+    <p>{{board.deskripsi}} </p>
+    <a href="/dashboard"><i class='bx bx-home'></i></a>
+</nav>
+
+<section class="sectionOne"> 
+    <form action="/formuploadgambarpapan" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{board.id}}">
+        <input type="text" name="nama" placeholder="Nama Gambar">
+        <input type="text" name="deskripsi" placeholder="Deskripsi">
+        <input type="file" name="source">
+        <input type="submit" value="Upload">
+    </form>
+</section>
+
+<section class="sectionTwo">
+    <ul style="list-style: none;">
+        {% for image in imagelist %}
+        <li class="items">
+            <div class="items-one">
+                <img src="{{image.source.url}}" width="200">    
+            </div>
+            <div class="items-two">
+                <h4>{{image.nama}}</h4>
+                <p>{{image.deskripsi}}</p>    
+            </div>
+            <div class="items-three">
+                <a href="{{ image.source.url }}" download>Unduh Gambar</a>
+                <a class="hapus" href="/hapusgambarpapan/{{image.id}}/{{board.id}}">Hapus Gambar</a>
+            </div>
+        </li> 
+        {% endfor %}
+    </ul>
+</section>
+
+{% endblock content %}

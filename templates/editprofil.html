@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profil{% endblock title %}
+
+{% block content %}
+
+{% if error_message %}
+<p style="color: red;">{{ error_message }}</p>
+{% endif %}
+<style>
+  * {
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+  body {
+      background-color: #171D33;
+      background-image: url("static/components/croc.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      height: 100vh;
+      max-height: 100vh;
+      overflow: hidden;
+  }
+  .title {
+    display: flex;
+    width: 100%;
+    color: white;
+    justify-content: center;
+    font-family: "Sulphur Point", sans-serif;
+    font-size: 32px;
+    margin-top: 2em
+  }
+  main {
+    display: flex;
+    justify-content: center;
+  }
+  nav {
+    padding: 0 2em;
+    height: 8vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1em;
+    img {
+      width: 50px;
+      margin-top: 2em;
+    }
+  }
+  form {
+    display: block;
+    color: white;
+    width: 30%;
+    margin-top: 2em;
+    input {
+      width: 100%;
+      padding: 1em 5px;
+      border: none;
+      border-radius: 15px;
+      margin-bottom: 1em;
+      transition: 150ms ease-in-out;
+      
+    }
+    span {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      align-items: center;
+    }
+    input:hover {
+      background-color: gray;
+    }
+    input[type="submit"] {
+      background-color: #EF1033;
+      width: 20%;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      transition: 150ms ease-in-out;
+    }
+    input[type="submit"]:hover {
+      background-color: #a60d25;
+    }
+
+  }
+  label {
+    font-weight: bold;
+  }
+</style>
+<nav><a href="{% url 'profil' %}"><img src="static/components/profile2.png"></a></nav>
+<section class="title">
+  <h1>Edit Your Profile by Updating This!</h1>
+</section>
+<main>
+  <form method="POST" action="{% url 'editprofil' %}">
+    {% csrf_token %}
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username" value="{{ user.username }}"><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" value="{{ user.email }}"><br>
+    <label for="first_name">First Name:</label><br>
+    <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}"><br>
+    <label for="last_name">Last Name:</label><br>
+    <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}"><br>
+    <label for="password">Password (leave blank if not changing):</label><br>
+    <input type="password" id="password" name="password"><br>
+    <label for="password_confirm">Confirm Password:</label><br>
+    <input type="password" id="password_confirm" name="password_confirm"><br>
+    <span><input type="submit" value="Update" placeholder="Update"></span>
+  </form>  
+</main>
+
+
+{% endblock content %}

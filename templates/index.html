@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock title %}
+
+{% block content %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+    }
+    main,nav,body {
+        background: #FCFFE7;
+    }
+    nav {
+        display: flex;
+        height: 80px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+    .nav-left {
+        h3 {
+            font-family: 'Sulphur Point', cursive;
+            font-size: 32px;
+        }
+    }
+    .nav-right {
+        display: flex;
+        gap: 10px;
+        a {
+            display: flex;
+            justify-content: center;
+            width: 100px;
+            padding: 10px;
+            background-color: #CDCDCD;
+            border-radius: 10px;
+            transition: 150ms ease-in-out;
+            text-decoration: none;
+            color: black;
+            font-weight: 700;
+        }
+        a:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+        .login {
+            background-color: #EF1033;
+            color: white;
+        }
+    }
+    .section-one {
+        margin-top: 10px;
+        background-image: url('static/components/theme-bg.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        height: 550px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin: 100px 0;
+        padding: 40px 0;
+        color: #FCFFE7;
+        text-align: center;
+        border-radius: 15px;
+        h2 {
+            font-size: 48px;
+        }
+        p {
+            font-size: 18px;
+        }
+    }
+    .section-two {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #131D37;
+        color: #FCFFE7;
+        padding: 40px 0;
+        gap: 20px;
+        h2 {
+            font-size: 48px;
+        }
+        .motto {
+            display: flex;
+            justify-content: space-around;
+            font-size:32px;
+            transform: translateY(10px;)
+        }
+    }
+    .section-three {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding:40px 0;
+        margin:0;
+        background-color: #D6D9C4;
+        gap: 30px;
+        h2 {
+            font-size: 48px;
+            color: #EF1033;
+            font-family: 'Sulphur Point', sans-serif;
+        }
+        .container-s-3 {
+            display: flex;
+            gap: 50px;
+            .content-control {
+                gap: 30px;
+                display: flex;
+                border-radius: 10px;
+                padding:40px ;
+                flex-direction: column;
+                align-items: center;
+                gap:50px;
+                background-color: #FFEDE9;
+                width: 300px;
+                text-align: center;
+                p {
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+</style>
+<nav>
+    <div class="nav-left">
+        <h3>ImagiHub</h3>
+    </div>
+    <div class="nav-right">
+        <a class="login" href="/urllogin">Login</a>
+        <a href="/urlregister">Register</a>
+    </div>
+</nav>
+<main>
+    <section class="section-one">
+        <h2>Explore Limitless Inspiration by <br>Finding It Out</h2>
+        <p>Dive Into a World of Infinite Inspiration that will Uncover, Discover, Create, and <br>Ignite Your Imagination with Image Finding Experience</p>
+    </section>
+    <section class="section-two">
+        <h2>Headliner</h2>
+        <div class="headliner">
+            <img src="static/components/headliner.png">
+        <div>
+    </section>
+    <section class="section-three">
+        <h2>Here’s How It Works</h2>
+        <div class="container-s-3"> 
+            <div class="content-control">
+                <img src="static/components/Searching.png">
+                <p>Effortlessly find what you're looking for</p>
+            </div>
+            <div class="content-control">
+                <img src="static/components/Submit.png">
+                <p>Upload and preserve your cherished pict</p>
+            </div>
+            <div class="content-control">
+                <img src="static/components/Point.png">
+                <p> Collect your favorites picture so you can get back to them later.</p>
+            </div>
+            <div class="content-control">
+                <img src="static/components/Product.png">
+                <p>Unleash your imagination and spark new ideas.</p>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}

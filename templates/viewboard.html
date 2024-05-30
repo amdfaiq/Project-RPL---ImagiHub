@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Lihat Papan{% endblock title %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #FCFFE7;
+        padding: 0;
+        margin: 0;
+        font-family: "Inter", sans-serif;
+    }
+    .board-container {
+        display: flex;
+        justify-content: center;
+    }
+    ul.board-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+    li.board-item {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 40px;
+        padding: 30px;
+        background-color: #171D33;
+        min-width: 286px;
+        max-width: 286px;
+    }
+    .board-nama {
+        color: #FCFFE7;
+        font-weight: bold;
+        font-size: 32px;
+        font-family: sans-serif;
+    }
+    .board-deskripsi {
+        color: #AAAAAA;
+        font-style: italic;
+        font-size: 20px;
+    }
+    .board-item a {
+        margin-top: 8px;
+    }
+    h1 {
+        display: flex;
+        justify-content: center;
+        font-family: "Sulphur Point" ,sans-serif;
+        background-color: #D9D9D9;
+        padding: 12px 0;
+        font-size: 36px;
+    }
+    .board-item-desc {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .board-item-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        a {
+            text-decoration: none;
+            background-color: #D6D9C4;
+            padding: 10px;
+            border-radius: 30px;
+            width: 10rem;
+            text-align: center;
+            font-family: sans-serif;
+            color: black;
+            font-family: "Inter", sans-serif;
+            transition: 150ms ease-in-out;
+        }
+        a:hover {
+            background-color: #a5a894;
+        }
+        .btn {
+            background-color: #EF1033;
+            color:white;
+            font-family: "Inter", sans-serif;
+        }
+        .btn:hover {
+            background-color: #a30d25;
+        }
+    }
+    
+        
+</style>
+
+<h1>Board</h1>
+<div class="board-container">
+    <ul class="board-list">
+        {% for board in boardlist %}
+        <li class="board-item">
+            <div class="board-item-desc">
+                <span class="board-nama">{{board.nama}}</span>
+                <span class="board-deskripsi">{{board.deskripsi}}</span>
+            </div>
+            <div class="board-item-btn">
+                <a href="lihatgambarpapan/{{board.id}}">Lihat Papan</a>
+                <a href="boardedit/{{board.id}}">Edit Papan</a>
+                <a class="btn" href="boarddelete/{{board.id}}">Hapus Papan</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

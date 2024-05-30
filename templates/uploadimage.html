@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock title %}
+
+{% block content %}
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+    }
+    body {
+        background-color: #FCFFE7;
+        padding: 0 20px;
+    }
+    nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 10px;
+        margin: 50px 10px;
+        form {
+            input {
+                padding: 10px;
+                border: none; 
+                border-radius: 10px;
+                background-color: #171D33;
+                color: #FCFFE7;
+            }
+            input[type="submit"] {
+                transition: 150ms ease-in-out;
+                background-color: #EF1033;
+            }
+            input[type="submit"]:hover {
+                transform: scale(1.1);
+            }
+        }
+        a {
+            text-decoration: none;
+            font-weight: 700;
+            color: black;
+        }
+        img {
+            height: 30px;
+        }
+    }
+
+    .uploaded {
+        padding: 10px;
+        ul {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 24px;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            height: 400px;
+            max-height: 400px;
+        }
+        .uploadIndex {
+            font-family: "Inter", sans-serif;
+            text-align: center;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: space-between;
+            border-radius: 40px;
+            padding: 20px;
+            background-color: #D6D9C4;
+            min-width: 280px;
+            max-width: 280px;
+            .index-three {
+                background-color: #EF1033;
+                padding: 5px;
+                border-radius: 10px;
+                a {
+                    text-decoration: none;
+                    font-family: 'Inter', sans-serif;
+                    color: #D6D9C4;
+                }
+            }
+        }
+    }
+</style>
+<nav>
+    <form action="formuploadimage" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="nama" placeholder="Nama Gambar">
+        <input type="text" name="deskripsi" placeholder="Deskripsi">
+        <input type="file" name="source">
+        <input type="submit" value="Upload">
+    </form>
+    
+    <p>
+        <a href="/dashboard"><img src="static/components/Home.png" width-"200" height="200"></a>
+    </p>
+</nav>
+
+<section class="uploaded">
+    <ul style="list-style: none;">
+        {% for image in imagelist %}
+        <li class="uploadIndex">
+            <div class="index-one">
+                <img src="{{image.source.url}}" width="200" style="border-radius: 10px;">    
+            </div>
+            <div class="index-two">
+                <h4>{{image.nama}}</h4>
+                <p>{{image.deskripsi}}</p>    
+            </div>
+            <div class="index-three">
+                <a href="/hapusgambar/{{image.id}}">Hapus Gambar</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock content %}

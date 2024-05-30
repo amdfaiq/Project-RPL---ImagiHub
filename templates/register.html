@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock title %}
+
+{% block content %}
+<style> 
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        background-color: #D6D9C4;
+    }
+    .title-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        gap:3vh;
+    }
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:100vh;
+        
+    }
+
+    form {
+        border-radius: 30px;
+        border: 2px solid #171D33;
+        background: #171D33;
+        padding:8vh;
+        gap: 19px;
+        border: none;
+        font-size: 14px;
+        font-family: 'Inter', sans-serif;
+        p {
+            color: #D6D9C4;
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+    }
+
+    input {
+        border-radius:30px;
+        padding: 23px;
+        width: 80vh;
+        border: none;
+        }
+
+    .btn {
+        background-color: #EF1033;
+        color: white;
+        border: none;   
+        transition: 150ms ease-in-out;
+    }
+    .btn:hover {
+        background-color: #a30d25;
+    }
+    
+    .font {
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        gap: 10px;
+        font-family: "Sulphur Point", sans-serif;
+        h1 {
+            font-size: 50px;
+        }
+        p {
+            font-size: 20px;
+        }
+    }
+</style>
+<div class="content">
+    <div class="image"><img src="static/components/Mirrorball.png" width="900px"></div>
+    <div class="title-container">
+        <div class="font">
+            <h1 class="judul">Create Your Account</h1>
+            <p class="desc">Let’s Begin Your Journey by Signing Up Here!</p>
+        </div>
+        <div>
+            <form action="formregister" method="POST" style="display:flex; flex-direction:column">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username">
+                <input type="email" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Password">
+                <input type="text" name="firstname" placeholder="Firstname">
+                <input type="text" name="lastname" placeholder="Lastname">
+                <input class="btn" type="submit" value="Register">
+                <p>Already have an account? <a href="/urllogin">Login</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
